@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@slack/web-api": "^6.5.1",
     "@svgr/webpack": "^6.0.0",
     "next": "11.1.2",
     "react": "17.0.2",

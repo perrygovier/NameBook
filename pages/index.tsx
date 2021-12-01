@@ -2,11 +2,22 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react';
 import Foo from '../components/foo/Foo';
+
 import styles from '../styles/Home.module.css'
 import Star from '../icons/star.svg';
 
 export default function Home() {
-  const { apiData, setApiData } = useState({});
+  const [ apiData, setApiData ] = useState({});
+
+  
+  const getData = () => {
+    fetch('/api/users')
+      .then(response => response.json())
+      .then(data => setApiData(data))
+    ;
+  }
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -25,16 +36,16 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+          <a onClick={getData} className={styles.card}>
             <h2>Get Friends list &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
           </a>
         </div>
+        <button>Get Data</button>
+        <pre className={styles.code}><code>
+          {JSON.stringify(apiData, null, 2)}
+        </code></pre>
         <Foo/>
         <Star/>
-        <pre><code>
-          {apiData}
-        </code></pre>
       </main>
 
       <footer className={styles.footer}>
